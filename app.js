@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Link routes Here.
 require(`./routes${url_api}user.routes.js`)(app);
+require(`./routes${url_api}auth.routes.js`)(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
