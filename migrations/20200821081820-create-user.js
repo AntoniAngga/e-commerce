@@ -23,12 +23,14 @@ module.exports = {
       phone_number: {
         allowNull: false,
         type: Sequelize.STRING,
+        unique: true,
       },
       username: {
         type: Sequelize.STRING,
       },
       email: {
         type: Sequelize.STRING,
+        unique: true,
       },
       password: {
         allowNull: false,
