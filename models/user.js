@@ -1,7 +1,5 @@
 'use strict';
-const {
-  Model
-} = require('sequelize');
+const { Model } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
@@ -10,22 +8,26 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static getFullname() {
-      return [this.firstName, this.lastName].join(" ");
+      return [this.firstName, this.lastName].join(' ');
     }
     static associate(models) {
       // define association here
     }
-  };
-  User.init({
-    firstName: DataTypes.STRING,
-    lastName: DataTypes.STRING,
-    role: DataTypes.ENUM,
-    phone_number: DataTypes.STRING,
-    username: Sequelize.STRING,
-    password: Sequelize.STRING,
-    addressId: Sequelize.INTEGER,
-    sequelize,
-    modelName: 'User',
-  });
+  }
+  User.init(
+    {
+      firstName: DataTypes.STRING,
+      lastName: DataTypes.STRING,
+      role: DataTypes.ENUM('admin', 'customer'),
+      gender: DataTypes.ENUM('male', 'female'),
+      phone_number: DataTypes.STRING,
+      username: DataTypes.STRING,
+      password: DataTypes.STRING,
+    },
+    {
+      sequelize,
+      modelName: 'User',
+    }
+  );
   return User;
 };
