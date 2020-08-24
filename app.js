@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 require(`./routes${url_api}user.routes.js`)(app);
 require(`./routes${url_api}auth.routes.js`)(app);
 require(`./routes${url_api}account.routes.js`)(app);
+require(`./routes${url_api}/ppob/pln.routes.js`)(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

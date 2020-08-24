@@ -14,6 +14,6 @@ module.exports = (app) => {
   //Update Account
   app.put(url_api + '/:accountId', account.update);
 
-  //Delete Account
+  //Delete account
   app.delete(url_api + '/:accountId', account.delete);
 };
