@@ -12,8 +12,7 @@ module.exports = {
         type: Sequelize.STRING,
       },
       status: {
-        type: Sequelize.ENUM,
-        values: ['waiting', 'success', 'cancel'],
+        type: Sequelize.STRING,
       },
       category: {
         type: Sequelize.STRING,
@@ -29,6 +28,14 @@ module.exports = {
       },
       total_price: {
         type: Sequelize.FLOAT,
+      },
+      userId: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        references: {
+          model: 'Users',
+          key: 'id',
+        },
       },
       createdAt: {
         allowNull: false,

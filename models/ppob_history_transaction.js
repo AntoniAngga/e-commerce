@@ -14,12 +14,13 @@ module.exports = (sequelize, DataTypes) => {
   PPOB_history_transaction.init(
     {
       invoice: DataTypes.STRING,
-      status: DataTypes.ENUM('waiting', 'success', 'cancel'),
+      status: DataTypes.STRING,
       category: DataTypes.STRING,
       number: DataTypes.STRING,
       payment_method: DataTypes.STRING,
       detail_transaction: DataTypes.JSON,
       total_price: DataTypes.FLOAT,
+      userId: DataTypes.INTEGER,
     },
     {
       sequelize,
