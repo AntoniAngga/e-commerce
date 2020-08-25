@@ -1,6 +1,7 @@
 const md5 = require('md5');
 const uniqid = require('uniqid');
 const apiClient = require('../../../services/axios');
+const { decode } = require('../../../services/decode');
 const { PPOB_history_transaction } = require('../../../models/index');
 const usernameTxt = '085385550999';
 const passwordTxt = '6885ee24582e5804';
@@ -48,7 +49,6 @@ exports.top_up_request = async (req, res) => {
       hp: data.token_number,
       pulsa_code: data.pulsa_code,
     });
-
     if (requestToken.status === 2) {
       status = 'Failed';
     } else if (requestToken.status === 1) {
@@ -56,7 +56,6 @@ exports.top_up_request = async (req, res) => {
     } else if (requestToken.status === 0) {
       status = 'Process';
     }
-
     await PPOB_history_transaction.create({
       invoice: refId,
       status: status,
@@ -65,9 +64,8 @@ exports.top_up_request = async (req, res) => {
       number: data.token_number,
       detail_transaction: requestToken.data,
       total_price: requestToken.data.data.price,
-      userId: 1,
+      userId: req.user_token.id,
     });
-
     res.status(200).json({
       messages: 'Success top up PPOB PLN PrePaid',
       result: requestToken.data,
