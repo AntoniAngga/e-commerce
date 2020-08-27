@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard Ecommerce</title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <%- include partials/script.ejs %>
+  </head>
+  <body>
+    <div id="login-page" class="container row valign-wrapper">
+      <div class="col s12 z-depth-6 card-panel">
+        <form action="/login" method="POST" class="login-form">
+          <div class="row">
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">mail_outline</i>
+              <input class="validate" id="email" name="email" type="email">
+              <label for="email" data-error="wrong" data-success="right">Email</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+              <i class="material-icons prefix">lock_outline</i>
+              <input id="password" name="password" type="password">
+              <label for="password">Password</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12">
+            <button type="submit" class="btn waves-effect waves-light col s12">Login</button>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s6 m6 l6">
+              <p class="margin medium-small"><a href="#">Forgot password?</a></p>
+            </div>        
+          </div>
+        </form>
+      </div>
+    </div> 
+  </body>
+</html>
+
+
