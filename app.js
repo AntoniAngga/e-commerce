@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
 const express = require('express');
 const path = require('path');
 const favicon = require('serve-favicon');
-const flash = require('express-flash');
+// const flash = require('express-flash');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
 const url_api = '/api/v1/';
@@ -33,7 +33,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // app.use(passport.initialize());
 // app.use(passport.session());
-app.use(flash());
+// app.use(flash());
 
 // Link routes Here.
 // API HERE
