@@ -7,8 +7,26 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    convertToRupiah() {
+      let rupiah = '';
+      let angkarev = this.total_price.toString().split('').reverse().join('');
+      for (var i = 0; i < angkarev.length; i++)
+        if (i % 3 == 0) rupiah += angkarev.substr(i, 3) + '.';
+      return (
+        'Rp. ' +
+        rupiah
+          .split('', rupiah.length - 1)
+          .reverse()
+          .join('')
+      );
+    }
+
     static associate(models) {
       // define association here
+      PPOB_history_transaction.belongsTo(models.User, {
+        foreignKey: 'userId',
+        as: 'user',
+      });
     }
   }
   PPOB_history_transaction.init(

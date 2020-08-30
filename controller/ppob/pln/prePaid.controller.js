@@ -49,11 +49,11 @@ exports.top_up_request = async (req, res) => {
       hp: data.token_number,
       pulsa_code: data.pulsa_code,
     });
-    if (requestToken.status === 2) {
+    if (requestToken.data.data.status === 2) {
       status = 'Failed';
-    } else if (requestToken.status === 1) {
+    } else if (requestToken.data.data.status === 1) {
       status = 'Success';
-    } else if (requestToken.status === 0) {
+    } else if (requestToken.data.data.status === 0) {
       status = 'Process';
     }
     await PPOB_history_transaction.create({

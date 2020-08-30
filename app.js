@@ -47,7 +47,8 @@ require(`./routes${url_api}/ppob/pln.routes.js`)(app);
 
 //ADMIN DASHBOARD
 require('./routes/login.routes.js')(app);
-require('./routes/dashboard.routes.js')(app);
+require('./routes/login.routes.js')(app);
+require('./routes/ppob_history_transaction.routes.js')(app);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

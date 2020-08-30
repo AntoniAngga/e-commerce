@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Dashboard Ecommerce</title>
+    <%- include ../partials/script.ejs %>
+  </head>
+  <body>
+   <div class="container">
+   <div class="section">
+    <h4>Dashboard PPOB</h4>
+    <p>Semua Transaksi PPOB</p>
+  </div>
+  <div class="divider"></div>
+    <table class="striped responsive-table">
+        <thead>
+          <tr>
+              <th>Id</th>
+              <th>Invoice Number</th>
+              <th>Status</th>
+              <th>Payment Method</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Phone Number</th>
+          </tr>
+        </thead>
+
+        <tbody>
+        <% history_transactions.forEach(ht => { %>
+          <tr>
+            <td><%= ht.id %></td>
+            <td><a href='/ppob-history-transaction/<%= ht.id %>'><%= ht.invoice %></a></td>
+            <td><%= ht.status %></td>
+            <td><%= ht.payment_method %></td>
+            <td><%= ht.user.getFullname() %></td>
+            <td><%= ht.user.email %></td>
+            <td><%= ht.user.phone_number %></td>
+          </tr>
+        <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
