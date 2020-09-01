@@ -46,6 +46,7 @@ require(`./routes${url_api}account.routes.js`)(app);
 require(`./routes${url_api}/ppob/pln.routes.js`)(app);
 require(`./routes${url_api}/ppob/pdam.routes.js`)(app);
 require(`./routes${url_api}/ppob/bpjs.routes.js`)(app);
+require(`./routes${url_api}/ppob/pulsa.routes.js`)(app);
 
 //ADMIN DASHBOARD
 require('./routes/login.routes.js')(app);
