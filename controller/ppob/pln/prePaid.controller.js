@@ -1,10 +1,9 @@
 const md5 = require('md5');
 const uniqid = require('uniqid');
 const apiClient = require('../../../services/axios');
-const { decode } = require('../../../services/decode');
 const { PPOB_history_transaction } = require('../../../models/index');
-const usernameTxt = '085385550999';
-const passwordTxt = '6885ee24582e5804';
+const usernameTxt = process.env.MOBILE_PULSA_USERNAME;
+const passwordTxt = process.env.MOBILE_PULSA_PASSWORD;
 
 exports.check_pln_pricing = async (req, res) => {
   // Type : pln
@@ -15,12 +14,15 @@ exports.check_pln_pricing = async (req, res) => {
   const status = req.query.status || 'all';
 
   try {
-    const priceList = await apiClient.requestPpob.post(plnUrlCheckPrice, {
-      commands: 'pricelist',
-      username: usernameTxt,
-      sign: signTxt,
-      status: status,
-    });
+    const priceList = await apiClient.requestPrePaidPpob.post(
+      plnUrlCheckPrice,
+      {
+        commands: 'pricelist',
+        username: usernameTxt,
+        sign: signTxt,
+        status: status,
+      }
+    );
     res.status(200).json({
       messages: 'Success get Pricelist PPOB PLN',
       result: priceList.data,
@@ -41,14 +43,17 @@ exports.top_up_request = async (req, res) => {
   let status = '';
 
   try {
-    const requestToken = await apiClient.requestPpob.post(plnUrlTopUpPrice, {
-      commands: 'topup',
-      username: usernameTxt,
-      sign: signTxt,
-      ref_id: refId,
-      hp: data.token_number,
-      pulsa_code: data.pulsa_code,
-    });
+    const requestToken = await apiClient.requestPrePaidPpob.post(
+      plnUrlTopUpPrice,
+      {
+        commands: 'topup',
+        username: usernameTxt,
+        sign: signTxt,
+        ref_id: refId,
+        hp: data.token_number,
+        pulsa_code: data.pulsa_code,
+      }
+    );
     if (requestToken.data.data.status === 2) {
       status = 'Failed';
     } else if (requestToken.data.data.status === 1) {
@@ -82,16 +87,19 @@ exports.top_up_request = async (req, res) => {
 
 exports.check_status = async (req, res) => {
   const plnUrlCheckStatus = '/';
-  const refId = 'order1';
+  const refId = req.params.refId || '';
   const signTxt = md5(usernameTxt + passwordTxt + refId);
 
   try {
-    const tokenNumber = await apiClient.requestPpob.post(plnUrlCheckStatus, {
-      commands: 'inquiry',
-      username: usernameTxt,
-      sign: signTxt,
-      ref_id: refId,
-    });
+    const tokenNumber = await apiClient.requestPrePaidPpob.post(
+      plnUrlCheckStatus,
+      {
+        commands: 'inquiry',
+        username: usernameTxt,
+        sign: signTxt,
+        ref_id: refId,
+      }
+    );
     res.status(200).json({
       messages: 'Success check PPOB PLN PrePaid',
       result: tokenNumber.data,
