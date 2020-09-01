@@ -7,7 +7,7 @@ const passwordTxt = process.env.MOBILE_PULSA_PASSWORD;
 exports.check_bill_pln = async (req, res) => {
   const plnCheckBill = '/';
   const plnNumber = req.query.plnNumber || '530000000001';
-  const refId = `PULSA-PLN-POSTPAID-${uniqid()}`;
+  const refId = `PLN-POSTPAID-${uniqid()}`;
   const signTxt = md5(usernameTxt + passwordTxt + refId);
   try {
     const bill = await apiClient.requestPostPaidPpob.post(plnCheckBill, {
