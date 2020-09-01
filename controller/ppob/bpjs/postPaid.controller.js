@@ -47,12 +47,7 @@ exports.payment_bill_bpjs = async (req, res) => {
   const trId = req.body.trId;
   const signTxt = md5(usernameTxt + passwordTxt + trId);
   try {
-    const bill = await apiClient.requestPostPaidPpob.post(bpjsPaymentBill, {
-      commands: 'pay-pasca',
-      username: usernameTxt,
-      tr_id: trId,
-      sign: signTxt,
-    });
+    const bill = await apiClient.paymentPostPaid(trId, usernameTxt, signTxt);
 
     if (bill.data.data.response_code === '00') {
       return res.status(200).json({
