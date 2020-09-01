@@ -43,7 +43,6 @@ exports.check_bill_bpjs = async (req, res) => {
 
 exports.payment_bill_bpjs = async (req, res) => {
   // Tr_id = get from check bill pln
-  const bpjsPaymentBill = '/';
   const trId = req.body.trId;
   const signTxt = md5(usernameTxt + passwordTxt + trId);
   try {

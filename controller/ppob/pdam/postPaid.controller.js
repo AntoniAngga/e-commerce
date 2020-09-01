@@ -41,17 +41,10 @@ exports.check_bill_pdam = async (req, res) => {
 
 exports.payment_bill_pdam = async (req, res) => {
   // Tr_id = get from check bill pln
-  const pdamPaymentBill = '/';
   const trId = req.body.trId;
-  console.log(trId);
   const signTxt = md5(usernameTxt + passwordTxt + trId);
   try {
-    const bill = await apiClient.requestPostPaidPpob.post(pdamPaymentBill, {
-      commands: 'pay-pasca',
-      username: usernameTxt,
-      tr_id: trId,
-      sign: signTxt,
-    });
+    const bill = await apiClient.paymentPostPaid(trId, usernameTxt, signTxt);
 
     if (bill.data.data.response_code === '00') {
       return res.status(200).json({
